@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	var number1, number2 int
-	var operator rune
+	var operator string
 
 	_, err1 := fmt.Scan(&number1)
 	if err1 != nil {
@@ -24,8 +24,19 @@ func main() {
 		return
 	}
 
-	if operator == '/' && number2 == 0 {
-		fmt.Println("Division by zero")
-		return
+	switch operator {
+	case "+":
+		fmt.Println(number1 + number2)
+	case "-":
+		fmt.Println(number1 - number2)
+	case "*":
+		fmt.Println(number1 * number2)
+	case "/":
+		if number2 == 0 {
+			fmt.Println("Division by zero")
+		}
+		fmt.Println(number1 / number2)
+	default:
+		fmt.Println("Invalid operation")
 	}
 }
