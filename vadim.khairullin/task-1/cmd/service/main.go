@@ -1,19 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var (
-		number1  int
-		number2  int
+		first    int
+		second   int
 		operator string
 	)
-	_, err1 := fmt.Scan(&number1)
+	_, err1 := fmt.Scan(&first)
 	if err1 != nil {
 		fmt.Println("Invalid first operand")
 		return
 	}
-	_, err2 := fmt.Scan(&number2)
+	_, err2 := fmt.Scan(&second)
 	if err2 != nil {
 		fmt.Println("Invalid second operand")
 		return
@@ -23,20 +25,19 @@ func main() {
 		fmt.Println("Invalid operation")
 		return
 	}
-
 	switch operator {
 	case "+":
-		fmt.Println(number1 + number2)
+		fmt.Println(first + second)
 	case "-":
-		fmt.Println(number1 - number2)
+		fmt.Println(first - second)
 	case "*":
-		fmt.Println(number1 * number2)
+		fmt.Println(first * second)
 	case "/":
-		if number2 == 0 {
+		if second == 0 {
 			fmt.Println("Division by zero")
 			return
 		}
-		fmt.Println(number1 / number2)
+		fmt.Println(first / second)
 	default:
 		fmt.Println("Invalid operation")
 	}
