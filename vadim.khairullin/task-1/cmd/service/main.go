@@ -8,18 +8,18 @@ func main() {
 		second   int
 		operator string
 	)
-	_, err_first := fmt.Scan(&first)
-	if err_first != nil {
+	_, err := fmt.Scan(&first)
+	if err != nil {
 		fmt.Println("Invalid first operand")
 		return
 	}
-	_, err_second := fmt.Scan(&second)
-	if err_second != nil {
+	_, err = fmt.Scan(&second)
+	if err != nil {
 		fmt.Println("Invalid second operand")
 		return
 	}
-	_, err_operator := fmt.Scan(&operator)
-	if err_operator != nil {
+	_, err = fmt.Scan(&operator)
+	if err != nil {
 		fmt.Println("Invalid operation")
 		return
 	}
