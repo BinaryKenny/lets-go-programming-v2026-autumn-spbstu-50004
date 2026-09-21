@@ -10,18 +10,18 @@ func main() {
 		second   int
 		operator string
 	)
-	_, err1 := fmt.Scan(&first)
-	if err1 != nil {
+	_, err_first := fmt.Scan(&first)
+	if err_first != nil {
 		fmt.Println("Invalid first operand")
 		return
 	}
-	_, err2 := fmt.Scan(&second)
-	if err2 != nil {
+	_, err_second := fmt.Scan(&second)
+	if err_second != nil {
 		fmt.Println("Invalid second operand")
 		return
 	}
-	_, err3 := fmt.Scan(&operator)
-	if err3 != nil {
+	_, err_operator := fmt.Scan(&operator)
+	if err_operator != nil {
 		fmt.Println("Invalid operation")
 		return
 	}
