@@ -14,7 +14,7 @@ func main() {
 
 	_, err := fmt.Scan(&Departments)
 	if err != nil || Departments < 1 || Departments > 1000 {
-		fmt.Println("Error: wrong number of Departments", err)
+		fmt.Println("Error: wrong number of Departments")
 
 		return
 	}
@@ -23,7 +23,7 @@ func main() {
 
 		_, err = fmt.Scan(&Employees)
 		if err != nil || Employees < 1 || Employees > 1000 {
-			fmt.Println("Error: wrong number of Employees", err)
+			fmt.Println("Error: wrong number of Employees")
 
 			return
 		}
@@ -35,7 +35,7 @@ func main() {
 
 			_, err = fmt.Scan(&Temperature)
 			if err != nil || len(Temperature) != 4 {
-				fmt.Println("Error: wrong number of Temperature", err)
+				fmt.Println("Error: wrong number of Temperature")
 
 				return
 			}
@@ -49,15 +49,10 @@ func main() {
 				return
 			}
 
-			switch sign {
-			case ">=":
+			if sign == ">=" && minimum < temp {
 				minimum = temp
-			case "<=":
+			} else if sign == "<=" && maximum > temp {
 				maximum = temp
-			default:
-				fmt.Println("Error: wrong temperature sign")
-
-				return
 			}
 
 			if minimum <= maximum {
