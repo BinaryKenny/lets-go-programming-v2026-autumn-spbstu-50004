@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func main() {
+func main(){
 	var (
 		Departments int
 		Employees   int
@@ -19,7 +19,7 @@ func main() {
 		return
 	}
 
-	for range Departments {
+	for range Departments{
 
 		_, err = fmt.Scan(&Employees)
 		if err != nil || Employees < 1 || Employees > 1000 {
@@ -31,7 +31,7 @@ func main() {
 		minimum := 15
 		maximum := 30
 
-		for range Employees {
+		for range Employees{
 
 			_, err = fmt.Scan(&Temperature)
 			if err != nil || len(Temperature) != 4 {
