@@ -11,8 +11,6 @@ func main() {
 		Employees   int
 		Temperature string
 	)
-	minimum := 15
-	maximum := 30
 	_, err := fmt.Scan(&Departments)
 	if err != nil || Departments < 1 || Departments > 1000 {
 		fmt.Println("Error: wrong number of Departments", err)
@@ -24,6 +22,8 @@ func main() {
 			fmt.Println("Error: wrong number of Employees", err)
 			return
 		}
+		minimum := 15
+		maximum := 30
 		for j := 0; j < Employees; j++ {
 			_, err = fmt.Scan(&Temperature)
 			if err != nil || len(Temperature) != 4 {
@@ -48,6 +48,7 @@ func main() {
 				fmt.Println(minimum)
 			} else {
 				fmt.Println(-1)
+				return
 			}
 		}
 	}
