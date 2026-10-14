@@ -59,8 +59,6 @@ func main() {
 				fmt.Println(minimum)
 			} else {
 				fmt.Println(-1)
-
-				return
 			}
 		}
 	}
