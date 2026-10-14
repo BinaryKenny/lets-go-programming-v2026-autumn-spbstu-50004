@@ -35,7 +35,7 @@ func main() {
 
 			_, err = fmt.Scan(&Temperature)
 			if err != nil || len(Temperature) != 4 {
-				fmt.Println("Error: wrong number of Temperature")
+				fmt.Println("Error: wrong format of temperature")
 
 				return
 			}
