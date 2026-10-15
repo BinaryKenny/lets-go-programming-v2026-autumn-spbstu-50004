@@ -35,7 +35,6 @@ func setTemperatureByEmployees() error {
 	var employees int
 
 	_, err := fmt.Scan(&employees)
-
 	if err != nil || employees < 1 || employees > 1000 {
 		return errEmployees
 	}
@@ -66,7 +65,6 @@ func defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
 	)
 
 	_, err := fmt.Scan(&sign, &temp)
-
 	if err != nil {
 		return 0, 0, errTemperature
 	}
