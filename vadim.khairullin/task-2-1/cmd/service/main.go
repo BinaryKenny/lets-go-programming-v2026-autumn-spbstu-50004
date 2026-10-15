@@ -6,22 +6,22 @@ import (
 )
 
 var (
-	errEmployees   = errors.New("Error: wrong number of Employees")
-	errTemperature = errors.New("Error: wrong format of temperature")
-	errSign        = errors.New("Error: wrong format of sign")
+	errEmployees   = errors.New("wrong number of employees")
+	errTemperature = errors.New("wrong format of temperature")
+	errSign        = errors.New("wrong format of sign")
 )
 
 func main() {
-	var Departments int
+	var departments int
 
-	_, err := fmt.Scan(&Departments)
-	if err != nil || Departments < 1 || Departments > 1000 {
+	_, err := fmt.Scan(&departments)
+	if err != nil || departments < 1 || departments > 1000 {
 		fmt.Println("Error: wrong number of Departments")
 
 		return
 	}
 
-	for range Departments {
+	for range departments {
 		err = setTemperatureByEmployees()
 		if err != nil {
 			fmt.Println(err)
@@ -32,18 +32,18 @@ func main() {
 }
 
 func setTemperatureByEmployees() error {
-	var Employees int
+	var employees int
 
-	_, err := fmt.Scan(&Employees)
+	_, err := fmt.Scan(&employees)
 
-	if err != nil || Employees < 1 || Employees > 1000 {
+	if err != nil || employees < 1 || employees > 1000 {
 		return errEmployees
 	}
 
 	minimum := 15
 	maximum := 30
 
-	for range Employees {
+	for range employees {
 		minimum, maximum, err = defineTemperatureRegime(minimum, maximum)
 		if err != nil {
 			return err
