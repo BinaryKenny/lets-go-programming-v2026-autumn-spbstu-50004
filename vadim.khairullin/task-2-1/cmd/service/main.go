@@ -3,13 +3,16 @@ package main
 import (
 	"errors"
 	"fmt"
-	"strconv"
+)
+
+var (
+	errEmployees   = errors.New("Error: wrong number of Employees")
+	errTemperature = errors.New("Error: wrong format of temperature")
+	errSign        = errors.New("Error: wrong format of sign")
 )
 
 func main() {
-	var (
-		Departments int
-	)
+	var Departments int
 
 	_, err := fmt.Scan(&Departments)
 	if err != nil || Departments < 1 || Departments > 1000 {
@@ -30,9 +33,11 @@ func main() {
 
 func setTemperatureByEmployees() error {
 	var Employees int
+
 	_, err := fmt.Scan(&Employees)
+
 	if err != nil || Employees < 1 || Employees > 1000 {
-		return errors.New("Error: wrong number of Employees")
+		return errEmployees
 	}
 
 	minimum := 15
@@ -50,29 +55,38 @@ func setTemperatureByEmployees() error {
 			fmt.Println(-1)
 		}
 	}
+
 	return nil
 }
 
-func defineTemperatureRegime(min int, max int) (int, int, error) {
-	var Temperature string
+func defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
+	var (
+		sign string
+		temp int
+	)
 
-	_, err := fmt.Scan(&Temperature)
-	if err != nil || len(Temperature) != 4 {
-		return 0, 0, errors.New("Error: wrong format of temperature")
+	_, err := fmt.Scan(&sign, &temp)
+
+	if err != nil {
+		return 0, 0, errTemperature
 	}
-
-	sign := Temperature[0:2]
-	temp, _ := strconv.Atoi(Temperature[2:4])
 
 	if temp < 15 || temp > 30 {
-		return 0, 0, errors.New("Error: temperature out of range")
+		return 0, 0, errTemperature
 	}
 
-	if sign == ">=" && min < temp {
-		min = temp
-	} else if sign == "<=" && max > temp {
-		max = temp
+	switch sign {
+	case ">=":
+		if minTemp < temp {
+			minTemp = temp
+		}
+	case "<=":
+		if maxTemp > temp {
+			maxTemp = temp
+		}
+	default:
+		return 0, 0, errSign
 	}
 
-	return min, max, nil
+	return minTemp, maxTemp, nil
 }
