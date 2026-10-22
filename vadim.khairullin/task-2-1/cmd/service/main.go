@@ -9,8 +9,11 @@ var (
 	errEmployees   = errors.New("wrong number of employees")
 	errTemperature = errors.New("wrong format of temperature")
 	errSign        = errors.New("wrong format of sign")
-	MIN            = 15
-	MAX            = 30
+)
+
+const (
+	MIN = 15
+	MAX = 30
 )
 
 type TemperatureRegime struct {
@@ -20,6 +23,7 @@ type TemperatureRegime struct {
 
 func main() {
 	var departments int
+
 	_, err := fmt.Scan(&departments)
 	if err != nil || departments < 1 || departments > 1000 {
 		fmt.Println("Error: wrong number of Departments")
@@ -28,7 +32,8 @@ func main() {
 	}
 
 	for range departments {
-		var regime = TemperatureRegime{minimum: MIN, maximum: MAX}
+		regime := TemperatureRegime{minimum: MIN, maximum: MAX}
+
 		err = regime.setTemperatureByEmployees()
 		if err != nil {
 			fmt.Println(err)
@@ -38,7 +43,7 @@ func main() {
 	}
 }
 
-func (r TemperatureRegime) setTemperatureByEmployees() error {
+func (r *TemperatureRegime) setTemperatureByEmployees() error {
 	var employees int
 
 	_, err := fmt.Scan(&employees)
@@ -62,7 +67,7 @@ func (r TemperatureRegime) setTemperatureByEmployees() error {
 	return nil
 }
 
-func (r TemperatureRegime) defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
+func (r *TemperatureRegime) defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
 	var (
 		sign string
 		temp int
