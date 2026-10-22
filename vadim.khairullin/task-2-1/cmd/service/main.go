@@ -9,11 +9,17 @@ var (
 	errEmployees   = errors.New("wrong number of employees")
 	errTemperature = errors.New("wrong format of temperature")
 	errSign        = errors.New("wrong format of sign")
+	MIN            = 15
+	MAX            = 30
 )
+
+type TemperatureRegime struct {
+	minimum int
+	maximum int
+}
 
 func main() {
 	var departments int
-
 	_, err := fmt.Scan(&departments)
 	if err != nil || departments < 1 || departments > 1000 {
 		fmt.Println("Error: wrong number of Departments")
@@ -22,7 +28,8 @@ func main() {
 	}
 
 	for range departments {
-		err = setTemperatureByEmployees()
+		var regime = TemperatureRegime{minimum: MIN, maximum: MAX}
+		err = regime.setTemperatureByEmployees()
 		if err != nil {
 			fmt.Println(err)
 
@@ -31,7 +38,7 @@ func main() {
 	}
 }
 
-func setTemperatureByEmployees() error {
+func (r TemperatureRegime) setTemperatureByEmployees() error {
 	var employees int
 
 	_, err := fmt.Scan(&employees)
@@ -39,17 +46,14 @@ func setTemperatureByEmployees() error {
 		return errEmployees
 	}
 
-	minimum := 15
-	maximum := 30
-
 	for range employees {
-		minimum, maximum, err = defineTemperatureRegime(minimum, maximum)
+		r.minimum, r.maximum, err = r.defineTemperatureRegime(r.minimum, r.maximum)
 		if err != nil {
 			return err
 		}
 
-		if minimum <= maximum {
-			fmt.Println(minimum)
+		if r.minimum <= r.maximum {
+			fmt.Println(r.minimum)
 		} else {
 			fmt.Println(-1)
 		}
@@ -58,7 +62,7 @@ func setTemperatureByEmployees() error {
 	return nil
 }
 
-func defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
+func (r TemperatureRegime) defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
 	var (
 		sign string
 		temp int
@@ -69,7 +73,7 @@ func defineTemperatureRegime(minTemp, maxTemp int) (int, int, error) {
 		return 0, 0, errTemperature
 	}
 
-	if temp < 15 || temp > 30 {
+	if temp < MIN || temp > MAX {
 		return 0, 0, errTemperature
 	}
 
