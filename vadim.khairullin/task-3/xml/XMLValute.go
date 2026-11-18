@@ -8,7 +8,7 @@ import (
 	"github.com/BinaryKenny/task-3/json"
 )
 
-type XmlValute struct {
+type XMLValute struct {
 	ID        string `xml:"id,attr"`
 	NumCode   int    `xml:"NumCode"`
 	CharCode  string `xml:"CharCode"`
@@ -18,9 +18,10 @@ type XmlValute struct {
 	VunitRate string `xml:"VunitRate"`
 }
 
-func ValuteParseToJSON(val XmlValute) (json.JSONValute, error) {
+func ValuteParseToJSON(val XMLValute) (json.JSONValute, error) {
 	num := val.Value
 	num = strings.ReplaceAll(num, ",", ".")
+
 	result, err := strconv.ParseFloat(num, 64)
 	if err != nil {
 		return json.JSONValute{}, fmt.Errorf("failed to parse to float: %w", err)

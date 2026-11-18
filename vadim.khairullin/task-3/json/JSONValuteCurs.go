@@ -9,10 +9,12 @@ import (
 	"slices"
 )
 
+const dirPermissions = 0o755
+
 func EncodeToJSON(curs []JSONValute, path string) {
 	direction := filepath.Dir(path)
 
-	err := os.MkdirAll(direction, 0o755)
+	err := os.MkdirAll(direction, dirPermissions)
 	if err != nil {
 		panic(fmt.Errorf("failure in making directory: %w", err))
 	}
@@ -34,7 +36,9 @@ func EncodeToJSON(curs []JSONValute, path string) {
 	})
 
 	encoder := json.NewEncoder(file)
+
 	encoder.SetIndent("", "  ")
+
 	err = encoder.Encode(curs)
 	if err != nil {
 		panic(err.Error() + " failed encode")

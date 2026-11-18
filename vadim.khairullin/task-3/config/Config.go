@@ -32,6 +32,7 @@ func ParseConfig() (Config, error) {
 	var conf Config
 
 	decoder := yaml.NewDecoder(file)
+
 	err = decoder.Decode(&conf)
 	if err != nil {
 		return conf, fmt.Errorf("failed to decode YAML file: %w", err)

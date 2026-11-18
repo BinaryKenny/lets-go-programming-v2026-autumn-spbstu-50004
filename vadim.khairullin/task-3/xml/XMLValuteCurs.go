@@ -14,7 +14,7 @@ import (
 type ValCurs struct {
 	Date    string      `xml:"Date,attr"`
 	Name    string      `xml:"name,attr"`
-	Valutes []XmlValute `xml:"Valute"`
+	Valutes []XMLValute `xml:"Valute"`
 }
 
 func ParseXMLFile(path string) ValCurs {
@@ -47,6 +47,7 @@ func ParseXMLFile(path string) ValCurs {
 
 func ValuteSliceParseToJSON(curs ValCurs) ([]json.JSONValute, error) {
 	valutes := make([]json.JSONValute, 0, len(curs.Valutes))
+
 	for _, val := range curs.Valutes {
 		valute, err := ValuteParseToJSON(val)
 		if err != nil {
