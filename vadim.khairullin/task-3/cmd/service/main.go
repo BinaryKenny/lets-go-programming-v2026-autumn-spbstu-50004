@@ -18,5 +18,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	json.EncodeToJSON(valutes, conf.OutputFile)
 }

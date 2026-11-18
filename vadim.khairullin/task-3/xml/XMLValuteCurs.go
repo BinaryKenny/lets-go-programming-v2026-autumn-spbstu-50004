@@ -37,6 +37,7 @@ func ParseXMLFile(path string) ValCurs {
 	}
 
 	var valCurs ValCurs
+
 	err = decoder.Decode(&valCurs)
 	if err != nil {
 		panic(fmt.Sprintln("The structure of xml file is wrong" + err.Error()))
@@ -53,6 +54,7 @@ func ValuteSliceParseToJSON(curs ValCurs) ([]json.JSONValute, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		valutes = append(valutes, valute)
 	}
 
