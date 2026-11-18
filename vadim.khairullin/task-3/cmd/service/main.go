@@ -1,22 +1,22 @@
 package main
 
 import (
-	"github.com/BinaryKenny/task-3/Config"
-	"github.com/BinaryKenny/task-3/Json"
-	"github.com/BinaryKenny/task-3/XML"
+	"github.com/BinaryKenny/task-3/config"
+	"github.com/BinaryKenny/task-3/json"
+	"github.com/BinaryKenny/task-3/xml"
 )
 
 func main() {
-	conf, err := Config.ParseConfig()
+	conf, err := config.ParseConfig()
 	if err != nil {
 		panic("Failed to parse config: " + err.Error())
 	}
 
-	ValCurs := XML.ParseXMLFile(conf.InputFile)
+	ValCurs := xml.ParseXMLFile(conf.InputFile)
 
-	valutes, err := XML.ValuteSliceParseToJson(ValCurs)
+	valutes, err := xml.ValuteSliceParseToJSON(ValCurs)
 	if err != nil {
 		panic(err)
 	}
-	Json.EncodeToJson(valutes, conf.OutputFile)
+	json.EncodeToJSON(valutes, conf.OutputFile)
 }

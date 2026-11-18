@@ -1,10 +1,11 @@
-package XML
+package xml
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/BinaryKenny/task-3/Json"
+	"github.com/BinaryKenny/task-3/json"
 )
 
 type XmlValute struct {
@@ -17,15 +18,15 @@ type XmlValute struct {
 	VunitRate string `xml:"VunitRate"`
 }
 
-func ValuteParseToJson(val XmlValute) (Json.JsonValute, error) {
+func ValuteParseToJSON(val XmlValute) (json.JSONValute, error) {
 	num := val.Value
-	num = strings.Replace(num, ",", ".", -1)
+	num = strings.ReplaceAll(num, ",", ".")
 	result, err := strconv.ParseFloat(num, 64)
 	if err != nil {
-		return Json.JsonValute{}, err
+		return json.JSONValute{}, fmt.Errorf("failed to parse to float: %w", err)
 	}
 
-	return Json.JsonValute{
+	return json.JSONValute{
 		NumCode:  val.NumCode,
 		CharCode: val.CharCode,
 		Value:    result,

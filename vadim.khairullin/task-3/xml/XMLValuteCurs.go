@@ -1,4 +1,4 @@
-package XML
+package xml
 
 import (
 	"encoding/xml"
@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/BinaryKenny/task-3/Json"
+	"github.com/BinaryKenny/task-3/json"
 	"golang.org/x/text/encoding/charmap"
 	"golang.org/x/text/transform"
 )
@@ -20,10 +20,15 @@ type ValCurs struct {
 func ParseXMLFile(path string) ValCurs {
 	file, err := os.Open(path)
 	if err != nil {
-		panic(fmt.Sprintln("XML file is uncorrect " + err.Error()))
+		panic(fmt.Sprintln("xml file is uncorrect " + err.Error()))
 	}
 
-	defer file.Close()
+	defer func() {
+		err := file.Close()
+		if err != nil {
+			panic(err)
+		}
+	}()
 
 	decoder := xml.NewDecoder(file)
 
@@ -34,16 +39,16 @@ func ParseXMLFile(path string) ValCurs {
 	var valCurs ValCurs
 	err = decoder.Decode(&valCurs)
 	if err != nil {
-		panic(fmt.Sprintln("The structure of XML file is wrong" + err.Error()))
+		panic(fmt.Sprintln("The structure of xml file is wrong" + err.Error()))
 	}
 
 	return valCurs
 }
 
-func ValuteSliceParseToJson(curs ValCurs) ([]Json.JsonValute, error) {
-	var valutes []Json.JsonValute
+func ValuteSliceParseToJSON(curs ValCurs) ([]json.JSONValute, error) {
+	valutes := make([]json.JSONValute, 0, len(curs.Valutes))
 	for _, val := range curs.Valutes {
-		valute, err := ValuteParseToJson(val)
+		valute, err := ValuteParseToJSON(val)
 		if err != nil {
 			return nil, err
 		}

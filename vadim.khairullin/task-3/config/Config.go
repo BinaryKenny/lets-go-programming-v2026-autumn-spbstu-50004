@@ -1,7 +1,8 @@
-package Config
+package config
 
 import (
 	"flag"
+	"fmt"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -18,17 +19,22 @@ func ParseConfig() (Config, error) {
 
 	file, err := os.Open(*configPath)
 	if err != nil {
-		return Config{}, err
+		return Config{}, fmt.Errorf("failed to open config file: %w", err)
 	}
 
-	defer file.Close()
+	defer func() {
+		err := file.Close()
+		if err != nil {
+			panic(fmt.Errorf("failed to close file: %w", err))
+		}
+	}()
 
 	var conf Config
 
 	decoder := yaml.NewDecoder(file)
 	err = decoder.Decode(&conf)
 	if err != nil {
-		return conf, err
+		return conf, fmt.Errorf("failed to decode YAML file: %w", err)
 	}
 
 	return conf, nil
