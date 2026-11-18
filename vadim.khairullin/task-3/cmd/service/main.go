@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
@@ -12,7 +14,7 @@ type Config struct {
 }
 
 func main() {
-	configPath := flag.String("config", "config.yaml", "Path to config file")
+	configPath := flag.String("config", "./cmd/source/config.yaml", "Path to config file")
 	flag.Parse()
 
 	file, err := os.Open(*configPath)
@@ -22,4 +24,11 @@ func main() {
 
 	defer file.Close()
 
+	var conf Config
+
+	decoder := yaml.NewDecoder(file)
+	err = decoder.Decode(&conf)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to parse config file: %s", err))
+	}
 }
