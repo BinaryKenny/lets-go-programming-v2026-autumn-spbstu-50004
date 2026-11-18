@@ -1,37 +1,22 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"os"
+	"github.com/BinaryKenny/task-3/cmd/Config"
+	"github.com/BinaryKenny/task-3/cmd/Json"
+	"github.com/BinaryKenny/task-3/cmd/XML"
 )
 
-type Config struct {
-	InputFile  string `yaml:"input-file"`
-	OutputFile string `yaml:"output-file"`
-}
-
 func main() {
-	configPath := flag.String("config", "./cmd/source/config.yaml", "Path to config file")
-	flag.Parse()
-
-	file, err := os.Open(*configPath)
+	conf, err := Config.ParseConfig()
 	if err != nil {
-		panic(fmt.Sprintf("Failed to open config file: %s", err))
+		panic("Failed to parse config: " + err.Error())
 	}
 
-	defer file.Close()
+	ValCurs := XML.ParseXMLFile(conf.InputFile)
 
-	var conf Config
-
-	decoder := yaml.NewDecoder(file)
-
-	err = decoder.Decode(&conf)
+	valutes, err := XML.ValuteSliceParseToJson(ValCurs)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to parse config file: %s", err))
+		panic(err)
 	}
-
-	ValCurs := parseXMLFile(conf.InputFile)
-
-	fmt.Println(ValCurs.Date)
+	Json.EncodeToJson(valutes, conf.OutputFile)
 }

@@ -1,4 +1,4 @@
-package main
+package Json
 
 type JsonValute struct {
 	NumCode  int     `json:"num_code"`

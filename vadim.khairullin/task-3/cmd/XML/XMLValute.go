@@ -1,11 +1,13 @@
-package main
+package XML
 
 import (
 	"strconv"
 	"strings"
+
+	"github.com/BinaryKenny/task-3/cmd/Json"
 )
 
-type XMLValute struct {
+type XmlValute struct {
 	ID        string `xml:"id,attr"`
 	NumCode   int    `xml:"NumCode"`
 	CharCode  string `xml:"CharCode"`
@@ -15,14 +17,17 @@ type XMLValute struct {
 	VunitRate string `xml:"VunitRate"`
 }
 
-func valuteParseToJson(val *XMLValute) (JsonValute, error) {
+func ValuteParseToJson(val XmlValute) (Json.JsonValute, error) {
 	num := val.Value
 	num = strings.Replace(num, ",", ".", -1)
 	result, err := strconv.ParseFloat(num, 64)
 	if err != nil {
-
-		return JsonValute{}, err
+		return Json.JsonValute{}, err
 	}
 
-	return JsonValute{val.NumCode, val.CharCode, result}, nil
+	return Json.JsonValute{
+		NumCode:  val.NumCode,
+		CharCode: val.CharCode,
+		Value:    result,
+	}, nil
 }
