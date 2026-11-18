@@ -31,4 +31,8 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Failed to parse config file: %s", err))
 	}
+
+	ValCurs := parseXMLFile(conf.InputFile)
+
+	fmt.Println(ValCurs.Date)
 }
