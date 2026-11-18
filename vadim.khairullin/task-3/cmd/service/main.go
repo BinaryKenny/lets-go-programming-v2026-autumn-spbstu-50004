@@ -4,8 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-
-	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
@@ -27,6 +25,7 @@ func main() {
 	var conf Config
 
 	decoder := yaml.NewDecoder(file)
+
 	err = decoder.Decode(&conf)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to parse config file: %s", err))
