@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/BinaryKenny/task-3/cmd/Config"
-	"github.com/BinaryKenny/task-3/cmd/Json"
-	"github.com/BinaryKenny/task-3/cmd/XML"
+	"github.com/BinaryKenny/task-3/Config"
+	"github.com/BinaryKenny/task-3/Json"
+	"github.com/BinaryKenny/task-3/XML"
 )
 
 func main() {

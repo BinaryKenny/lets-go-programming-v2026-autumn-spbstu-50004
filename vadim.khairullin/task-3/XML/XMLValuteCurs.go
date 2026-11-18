@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/BinaryKenny/task-3/cmd/Json"
+	"github.com/BinaryKenny/task-3/Json"
 	"golang.org/x/text/encoding/charmap"
 	"golang.org/x/text/transform"
 )

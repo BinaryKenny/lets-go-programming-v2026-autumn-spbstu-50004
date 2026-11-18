@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/BinaryKenny/task-3/cmd/Json"
+	"github.com/BinaryKenny/task-3/Json"
 )
 
 type XmlValute struct {
