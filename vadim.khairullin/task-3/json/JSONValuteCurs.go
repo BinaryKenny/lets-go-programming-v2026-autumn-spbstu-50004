@@ -7,11 +7,14 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+
+	"github.com/BinaryKenny/task-3/valute"
+	"github.com/BinaryKenny/task-3/xml"
 )
 
 const dirPermissions = 0o755
 
-func EncodeToJSON(curs []JSONValute, path string) {
+func EncodeToJSON(curs xml.ValCurs, path string) {
 	direction := filepath.Dir(path)
 
 	err := os.MkdirAll(direction, dirPermissions)
@@ -31,7 +34,7 @@ func EncodeToJSON(curs []JSONValute, path string) {
 		}
 	}()
 
-	slices.SortFunc(curs, func(i, j JSONValute) int {
+	slices.SortFunc(curs.Valutes, func(i, j valute.Valute) int {
 		return cmp.Compare(j.Value, i.Value)
 	})
 

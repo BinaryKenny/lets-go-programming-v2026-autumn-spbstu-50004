@@ -13,11 +13,5 @@ func main() {
 	}
 
 	ValCurs := xml.ParseXMLFile(conf.InputFile)
-
-	valutes, err := xml.ValuteSliceParseToJSON(ValCurs)
-	if err != nil {
-		panic(err)
-	}
-
-	json.EncodeToJSON(valutes, conf.OutputFile)
+	json.EncodeToJSON(ValCurs, conf.OutputFile)
 }
