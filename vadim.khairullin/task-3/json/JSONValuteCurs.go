@@ -42,7 +42,7 @@ func EncodeToJSON(curs xml.ValCurs, path string) {
 
 	encoder.SetIndent("", "  ")
 
-	err = encoder.Encode(curs)
+	err = encoder.Encode(curs.Valutes)
 	if err != nil {
 		panic(err.Error() + " failed encode")
 	}
