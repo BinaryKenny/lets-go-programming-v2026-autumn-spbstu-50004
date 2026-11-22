@@ -8,9 +8,9 @@ import (
 )
 
 type Valute struct {
-	NumCode  int     `json:"num_code" xml:"NumCode"`
+	NumCode  int     `json:"num_code"  xml:"NumCode"`
 	CharCode string  `json:"char_code" xml:"CharCode"`
-	Value    float64 `json:"value" xml:"-"`
+	Value    float64 `json:"value"     xml:"-"`
 }
 
 func (val *Valute) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
